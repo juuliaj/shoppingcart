@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+        <title>Home Page</title>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    </head>
+
+    <body>
+        <h1>Tervetuloa!</h1>
+
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Section</th>
+				<th>Info</th>
+				<th>Product in cart</th>
+			</tr>
+		</thead>
+
+
+		<tbody>
+			<tr th:each="item : ${items}">
+				<td th:text="${item.name}"></td>
+				<td th:text="${item.quantity}"></td>
+				<td th:text="${item.price}"></td>
+				<td th:text="${item.category.name}"></td>
+				<td><button onclick="showInfo()">Info</button></td>
+				<td><input type="checkbox"></td>
+				<td sec:authorize="hasAuthority('ADMIN')">
+				<a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
+				<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${item.id})}">Edit</a></td>
+				<script>
+				function showInfo() {
+					var info = document.getElementById(this.item);
+  				alert(info);}
+				</script>
+			</tr>
+		</tbody>
+	</table>
+	
+	<a class="btn btn-success" href="/add">Add a item</a>
+	
+	 <body>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+
+    </body>	
+</html>
