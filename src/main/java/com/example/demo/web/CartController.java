@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,11 @@ public class CartController {
 		model.addAttribute("items", iRepo.findAll());
 		return "itemlist";
 	}
+	
+	@RequestMapping(value="/login")
+		public String login() {
+			return "login";
+	} 
 	
 	@RequestMapping(value="/items", method = RequestMethod.GET)
 	public @ResponseBody List<Item> itemListRest(){
@@ -52,6 +58,7 @@ public class CartController {
 		return "redirect:main";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/delete/{id}") 
 	public String deleteItem(@PathVariable("id") Long itemid, Model model) {
 		iRepo.deleteById(itemid);
