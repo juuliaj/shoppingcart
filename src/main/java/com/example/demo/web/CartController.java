@@ -71,5 +71,4 @@ public class CartController {
 		model.addAttribute("categories", catRepo.findAll());
 		return "edititem";
 	}
-
 }
