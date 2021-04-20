@@ -32,7 +32,7 @@ public class ShoppingcartApplication {
 		catRepo.save(c2);
 		catRepo.save(c3);
 		
-		Item item1 = new Item("Banaani", 2, 0.70, "Keltainen banaaninippu", catRepo.findByName("HeVi-osasto").get(0));
+		Item item1 = new Item("Banaani", 2, 1.00, "Keltainen banaaninippu", catRepo.findByName("HeVi-osasto").get(0));
 		Item item2 = new Item("Ruisleipä", 1, 2.99, "Vaasan tumma ruisleipä", catRepo.findByName("Leivät").get(0));
 		Item item3 = new Item("Kauramaito", 2, 1.99, "Oatly Kauramaito", catRepo.findByName("Maitotuotteet").get(0));
 		

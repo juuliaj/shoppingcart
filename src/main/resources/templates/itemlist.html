@@ -8,7 +8,8 @@
     </head>
 
     <body>
-        <h1>Tervetuloa!</h1>
+
+        	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
 		<table class="table table-hover">
 		<thead>
@@ -27,17 +28,18 @@
 			<tr th:each="item : ${items}">
 				<td th:text="${item.name}"></td>
 				<td th:text="${item.quantity}"></td>
-				<td th:text="${item.price}"></td>
+				<td th:text="${item.price}">€</td>
 				<td th:text="${item.info}"></td>
 				<td th:text="${item.category.name}"></td>
 				<td><input type="checkbox"></td>
 				<td sec:authorize="hasAuthority('ADMIN')">
 				<a th:href="@{/delete/{id}(id=${item.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
 				<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${item.id})}">Edit</a></td>
-			
 			</tr>
 		</tbody>
 	</table>
+	
+	
 	
 	<a class="btn btn-success" href="/add">Add a item</a>
 	
